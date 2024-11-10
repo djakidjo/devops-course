@@ -74,7 +74,8 @@ rm "$pipe_name"
 ```
 ## 5. При помощи `HEREDOC` записать в файл многострочное сообщение
 ###  Результат:
-```[root@oracle-server /]# cat << EOF
+```
+[root@oracle-server /]# cat << EOF
 $(ls -la)
 EOF
 
