@@ -4,8 +4,7 @@
 ```
 #!/bin/bash
 
-net_info=$(ip addr)
-ip_address=$(echo $net_info | grep 'inet' | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]{1,2}' | tail -n 1)
+ip_address=$(echo $(ip addr) | grep 'inet' | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]{1,2}' | tail -n 1)
 echo "IP address: $ip_address"
 ```
 ###  Результат:
