@@ -3,13 +3,11 @@
 ### Скрипт:
 ```
 #!/bin/bash
-
-ip_address=$(echo $(ip addr) | grep 'inet' | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]{1,2}' | tail -n 1)
-echo "IP address: $ip_address"
+ip addr | grep 'inet' | tail -n 1
 ```
 ###  Результат:
-```[root@oracle-server /]# ./task-1.sh
-IP address: 78.140.240.10/24
+```[root@oracle-server hw-1]# ./task-1.sh
+inet 78.140.240.10/24 brd 78.140.240.255 scope global noprefixroute enp0s5
 ```
 ## 2. Создать именованный пайп ( named pipe ). Вывести в файл через созданный pipe вывод команды ss -plnt
 ### Скрипт:
@@ -56,19 +54,16 @@ updating: - (deflated 77%)
 ```
 #!/bin/bash
 
-pipe_name='pipe-3'
 date_format='+%s'
-mkfifo "$pipe_name"
+date_input="2024-11-10 16:00:00"
 
-echo $date_format > "$pipe_name" &
+echo "$date_format" | xargs -I {} date -d "$date_input" {}
 
-date -d "2024-11-10 16:00:00" "$(cat "$pipe_name")"
-
-rm "$pipe_name"
 ```
 ###  Результат:
 
-```[root@oracle-server /]# ./task-4.sh
+```
+[root@oracle-server hw-1]# ./task-4.sh
 1731254400
 ```
 ## 5. При помощи `HEREDOC` записать в файл многострочное сообщение
